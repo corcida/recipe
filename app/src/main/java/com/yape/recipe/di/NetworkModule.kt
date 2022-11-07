@@ -2,6 +2,8 @@ package com.yape.recipe.di
 
 import com.google.gson.Gson
 import com.google.gson.GsonBuilder
+import com.yape.recipe.data.network.RecipeRemoteDataSource
+import com.yape.recipe.data.network.RecipeService
 import com.yape.recipe.utils.Constants
 import dagger.Module
 import dagger.Provides
@@ -32,5 +34,13 @@ object NetworkModule {
     fun provideGson(): Gson = GsonBuilder()
         .setLenient()
         .create()
+
+    @Provides
+    fun provideRecipeService(retrofit: Retrofit):
+            RecipeService = retrofit.create(RecipeService::class.java)
+
+    @Provides
+    fun provideRecipeRemoteDataSource(service: RecipeService):
+            RecipeRemoteDataSource = RecipeRemoteDataSource(service)
 
 }

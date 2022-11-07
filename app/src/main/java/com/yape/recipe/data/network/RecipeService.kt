@@ -9,5 +9,5 @@ interface RecipeService {
 
     @Headers("Content-Type: application/json")
     @GET("recipes")
-    suspend fun getVideos(): Response<RecipeData>
+    suspend fun getRecipes(): Response<RecipeData>
 }
