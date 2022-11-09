@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <dimen name="horizontal_margin">@dimen/_10sdp</dimen>
+    <dimen name="detail_button_corner_radius">@dimen/_10sdp</dimen>
+    <dimen name="general_button_corner_radius">@dimen/_25sdp</dimen>
+
+    <dimen name="detail_text_size">@dimen/_15ssp</dimen>
+    <dimen name="detail_title_size">@dimen/_30ssp</dimen>
+    <dimen name="detail_button_text_size">@dimen/_10ssp</dimen>
+    <dimen name="movie_plot_text_size">@dimen/_12ssp</dimen>
+
+</resources>

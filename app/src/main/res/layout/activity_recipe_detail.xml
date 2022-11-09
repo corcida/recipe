@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ui.views.RecipeDetailActivity">
+
+    <androidx.appcompat.widget.AppCompatImageView
+        android:id="@+id/photo"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:transitionName="photo"
+        android:src="@drawable/img_recipe_sample"
+        android:scaleType="centerCrop" />
+
+    <androidx.appcompat.widget.AppCompatImageView
+        android:id="@+id/gradient"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:src="@drawable/gradient_detail_background"
+        android:scaleType="centerCrop" />
+
+    <androidx.core.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/_50sdp"
+        android:layout_marginHorizontal="@dimen/_15sdp"
+        android:background="@drawable/button_white_solid"
+        android:layout_marginBottom="@dimen/_60sdp">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="@dimen/_10sdp"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/black"
+                android:fontFamily="sans-serif-black"
+                android:textSize="@dimen/detail_title_size"
+                tools:text="Arepa"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/_10sdp"
+                android:textColor="@color/black"
+                android:fontFamily="sans-serif"
+                android:textSize="@dimen/detail_text_size"
+                tools:text="40min"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginVertical="@dimen/_10sdp"
+                android:textColor="@color/black"
+                android:fontFamily="sans-serif"
+                android:textSize="@dimen/detail_text_size"
+                android:text="@string/lorem_ipsum"/>
+
+        </LinearLayout>
+
+    </androidx.core.widget.NestedScrollView>
+
+    <androidx.appcompat.widget.AppCompatImageButton
+        android:id="@+id/back"
+        android:layout_width="@dimen/_50sdp"
+        android:layout_height="@dimen/_50sdp"
+        android:padding="@dimen/_15sdp"
+        android:background="@color/transparent"
+        android:src="@drawable/ic_back_arrow" />
+
+    <Button
+        android:id="@+id/language"
+        android:layout_width="match_parent"
+        android:layout_margin="@dimen/_12sdp"
+        android:layout_height="wrap_content"
+        android:text="@string/origin"
+        android:layout_alignParentBottom="true"
+        android:textAllCaps="false"
+        android:padding="@dimen/_8sdp"
+        android:layout_marginEnd="@dimen/_5sdp"
+        android:textColor="@color/button_active_text_state"
+        android:background="@drawable/button_active_state"
+        />
+
+</RelativeLayout>
