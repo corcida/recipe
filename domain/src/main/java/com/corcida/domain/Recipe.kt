@@ -5,6 +5,8 @@ data class Recipe(
     val title: String,
     val overview: String,
     val image: String,
+    val ingredients: List<String>,
+    val tags: List<String>,
     val location: Location,
     val favorite: Boolean
 )
