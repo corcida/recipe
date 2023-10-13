@@ -5,5 +5,10 @@ import com.corcida.domain.Recipe
 import kotlinx.coroutines.flow.Flow
 
 class GetRecipes (private val recipesRepository: RecipesRepository) {
-    suspend fun invoke(id: Int): Flow<List<Recipe>> = recipesRepository.getRecipes()
+    suspend fun invoke(): Flow<List<Recipe>> {
+        if (recipesRepository.isDatabaseEmpty()){
+            recipesRepository.saveRecipes(recipesRepository.getRecipesFromServer())
+        }
+        return recipesRepository.getRecipesFromDatabase()
+    }
 }

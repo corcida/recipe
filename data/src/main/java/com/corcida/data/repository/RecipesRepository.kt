@@ -10,15 +10,15 @@ class RecipesRepository(
     private val remoteDataSource: RemoteDataSource,
 ) {
 
-    suspend fun getRecipes(): Flow<List<Recipe>> {
+    suspend fun isDatabaseEmpty() = localDataSource.isEmpty()
 
-        if (localDataSource.isEmpty()) {
-            val recipes = remoteDataSource.getRecipes()
-            localDataSource.saveRecipes(recipes)
-        }
-
-        return localDataSource.getRecipes()
+    suspend fun getRecipesFromServer(): List<Recipe>{
+        return remoteDataSource.getRecipes()
     }
+
+    suspend fun saveRecipes(recipes: List<Recipe>) = localDataSource.saveRecipes(recipes)
+
+    fun getRecipesFromDatabase() = localDataSource.getRecipes()
 
     suspend fun findRecipe(id: Int): Recipe = localDataSource.findRecipe(id)
 

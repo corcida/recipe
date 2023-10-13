@@ -4,11 +4,14 @@ plugins {
 }
 
 java {
-    sourceCompatibility = JavaVersion.VERSION_1_7
-    targetCompatibility = JavaVersion.VERSION_1_7
+    sourceCompatibility = JavaVersion.VERSION_17
+    targetCompatibility = JavaVersion.VERSION_17
 }
 
 dependencies {
     implementation(project(":domain"))
     implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.6.4")
+
+    testImplementation("junit:junit:4.13.2")
+    testImplementation ("org.mockito.kotlin:mockito-kotlin:5.1.0")
 }

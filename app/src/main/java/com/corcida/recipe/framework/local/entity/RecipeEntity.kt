@@ -4,10 +4,10 @@ import androidx.room.Entity
 import androidx.room.PrimaryKey
 import androidx.room.TypeConverters
 import com.corcida.domain.Location
-import com.corcida.recipe.framework.local.converter.LocationConverter
+import com.corcida.recipe.framework.local.converter.RecipeConverters
 
 @Entity(tableName = "recipe")
-@TypeConverters(LocationConverter::class)
+@TypeConverters(RecipeConverters::class)
 data class RecipeEntity (
     @PrimaryKey
     val id: Int,

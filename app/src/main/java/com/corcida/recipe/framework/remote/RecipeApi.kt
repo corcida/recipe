@@ -14,7 +14,7 @@ object RecipeApi {
     }
 
     val recipeService: RecipeService = Retrofit.Builder()
-        .baseUrl("http://demo8268743.mockable.io/")
+        .baseUrl("https://demo8268743.mockable.io/")
         .client(okHttpClient)
         .addConverterFactory(GsonConverterFactory.create())
         .build()
