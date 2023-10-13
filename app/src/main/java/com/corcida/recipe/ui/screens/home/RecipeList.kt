@@ -111,15 +111,16 @@ private fun InformationBox(
             text = recipe.title,
             color = Color.White,
             style = MaterialTheme.typography.titleSmall,
+            maxLines = 1,
             modifier = Modifier
-                .padding(horizontal = dimensionResource(R.dimen.padding_xsmall))
+                .padding(horizontal = dimensionResource(R.dimen.padding_medium))
         )
     }
 }
 
 @Preview
 @Composable
-fun MediaListItemPreview() {
+fun RecipeListPreview() {
     RecipesAppComposable {
         val recipe = Recipe(
             1,

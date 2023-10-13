@@ -4,5 +4,5 @@ import com.corcida.domain.Recipe
 import kotlinx.coroutines.flow.Flow
 
 sealed class HomeUiState {
-    object Loading : HomeUiState()
+    class Loading(val value : Boolean) : HomeUiState()
 }
