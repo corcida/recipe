@@ -1,8 +1,6 @@
 package com.corcida.recipe.di
 
 import com.corcida.data.repository.RecipesRepository
-import com.corcida.data.source.LocalDataSource
-import com.corcida.data.source.RemoteDataSource
 import com.corcida.usecases.FindRecipe
 import com.corcida.usecases.GetRecipes
 import com.corcida.usecases.ToggleRecipeFavorite

@@ -7,7 +7,12 @@ import kotlinx.coroutines.flow.Flow
 class GetRecipes (private val recipesRepository: RecipesRepository) {
     suspend fun invoke(): Flow<List<Recipe>> {
         if (recipesRepository.isDatabaseEmpty()){
-            recipesRepository.saveRecipes(recipesRepository.getRecipesFromServer())
+            try{
+                val recipes = recipesRepository.getRecipesFromServer()
+                recipesRepository.saveRecipes(recipes)
+            }catch (e : Exception){
+                e.printStackTrace()
+            }
         }
         return recipesRepository.getRecipesFromDatabase()
     }

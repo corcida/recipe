@@ -6,7 +6,6 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Scaffold
-import androidx.compose.material3.Switch
 import androidx.compose.material3.Text
 import androidx.compose.material3.TopAppBar
 import androidx.compose.runtime.Composable
@@ -14,7 +13,6 @@ import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
-import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import com.corcida.recipe.ui.screens.common.RecipesAppComposable
 import com.corcida.recipe.ui.screens.common.components.ArrowBackIcon
@@ -27,7 +25,6 @@ import com.google.maps.android.compose.MapType
 import com.google.maps.android.compose.MapUiSettings
 import com.google.maps.android.compose.Marker
 import com.google.maps.android.compose.MarkerState
-import com.google.maps.android.compose.rememberCameraPositionState
 
 @OptIn(ExperimentalMaterial3Api::class)
 @ExperimentalFoundationApi
@@ -40,8 +37,8 @@ fun MapScreen(
     val location= mapViewModel.location.collectAsState()
     mapViewModel.findLocationFromRecipe(id)
 
-    var uiSettings by remember { mutableStateOf(MapUiSettings()) }
-    var properties by remember {
+    val uiSettings by remember { mutableStateOf(MapUiSettings()) }
+    val properties by remember {
         mutableStateOf(MapProperties(mapType = MapType.NORMAL))
     }
 

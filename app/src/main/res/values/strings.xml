@@ -1,4 +1,7 @@
 <resources>
     <string name="app_name">Recipe</string>
     <string name="ingredients">Ingredientes</string>
+    <string name="error_dialog_title">Error</string>
+    <string name="error_dialog_text">Revise su conexión a internet e intente de nuevo.</string>
+    <string name="no_data">No hay data de recetas actualmente</string>
 </resources>

@@ -5,13 +5,11 @@ import com.corcida.recipe.rules.MainDispatcherRule
 import com.corcida.usecases.GetRecipes
 import com.corcida.usecases.ToggleRecipeFavorite
 import kotlinx.coroutines.ExperimentalCoroutinesApi
-import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.flow.flowOf
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.runBlocking
 import kotlinx.coroutines.test.UnconfinedTestDispatcher
-import kotlinx.coroutines.test.advanceTimeBy
 import kotlinx.coroutines.test.advanceUntilIdle
 import kotlinx.coroutines.test.runTest
 import org.junit.Before
@@ -35,8 +33,8 @@ class HomeViewModelTest {
     val mainDispatcherRule = MainDispatcherRule()
 
     @Before
-    fun onBefore(){
-        getRecipes = mock<GetRecipes>(){
+    fun setUp(){
+        getRecipes = mock(){
             onBlocking { invoke() } doReturn (flowOf(FakeRecipes.fakeRecipes))
         }
         toggleRecipeFavorite = mock<ToggleRecipeFavorite>()

@@ -1,4 +1,4 @@
-package com.corcida.recipe.ui.screens.detail
+package com.corcida.recipe.ui.screens.map
 
 import com.corcida.recipe.fakes.FakeRecipes
 import com.corcida.recipe.rules.MainDispatcherRule
@@ -10,6 +10,7 @@ import kotlinx.coroutines.runBlocking
 import kotlinx.coroutines.test.UnconfinedTestDispatcher
 import kotlinx.coroutines.test.advanceUntilIdle
 import kotlinx.coroutines.test.runTest
+import org.junit.Assert.*
 import org.junit.Before
 import org.junit.Rule
 import org.junit.Test
@@ -17,10 +18,10 @@ import org.mockito.kotlin.doReturn
 import org.mockito.kotlin.mock
 
 @OptIn(ExperimentalCoroutinesApi::class)
-class DetailViewModelTest {
+class MapViewModelTest {
 
     //system in test
-    private lateinit var viewModel: DetailViewModel
+    private lateinit var viewModel: MapViewModel
 
     //dependencies
     private lateinit var findRecipe: FindRecipe
@@ -28,29 +29,28 @@ class DetailViewModelTest {
     //rules
     @get:Rule
     val mainDispatcherRule = MainDispatcherRule()
-
     @Before
-    fun setUp(){
+    fun setUp() {
         val expectedId = 1
         findRecipe = mock(){
             onBlocking { invoke(expectedId) } doReturn (FakeRecipes.fakeRecipes.first { it.id == 1 })
         }
-        viewModel = DetailViewModel(findRecipe)
+        viewModel = MapViewModel(findRecipe)
     }
 
     @Test
-    fun `When the user enters to the screen then the view model get the expected recipe`() = runTest {
+    fun `When the user enters to the screen then the view model get the expected location`() = runTest {
         //Given
-        val expectedRecipe =  FakeRecipes.expectedRecipe
+        val expectedLocation =  FakeRecipes.expectedLocation
 
         //When
         backgroundScope.launch(UnconfinedTestDispatcher(testScheduler)) {
-            viewModel.recipe.collect()
+            viewModel.location.collect()
         }
-        launch { viewModel.findRecipeById(1) }
+        launch { viewModel.findLocationFromRecipe(1) }
         advanceUntilIdle()
 
         //Then
-        runBlocking { assert(viewModel.recipe.value == expectedRecipe) }
+        runBlocking { assert(viewModel.location.value == expectedLocation) }
     }
 }

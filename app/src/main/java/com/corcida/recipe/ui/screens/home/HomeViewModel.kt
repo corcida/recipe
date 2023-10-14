@@ -8,7 +8,6 @@ import com.corcida.usecases.GetRecipes
 import com.corcida.usecases.ToggleRecipeFavorite
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.FlowPreview
-import kotlinx.coroutines.coroutineScope
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.SharingStarted
@@ -16,7 +15,6 @@ import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.combine
 import kotlinx.coroutines.flow.debounce
-import kotlinx.coroutines.flow.onEach
 import kotlinx.coroutines.flow.stateIn
 import kotlinx.coroutines.launch
 import javax.inject.Inject
@@ -28,11 +26,11 @@ class HomeViewModel  @Inject constructor(
     private val toggleRecipeFavorite: ToggleRecipeFavorite
 ) : ScopeViewModel() {
 
-    private val _uiState = MutableStateFlow<HomeUiState>(HomeUiState.Loading(false))
-    val uiState: StateFlow<HomeUiState> = _uiState
-
     private val _searchText = MutableStateFlow("")
     val searchText = _searchText.asStateFlow()
+
+    private val _loading = MutableStateFlow(true)
+    val loading = _loading.asStateFlow()
 
     private val originalRecipes = MutableStateFlow<List<Recipe>>(listOf())
     private val _recipes = MutableStateFlow<List<Recipe>>(listOf())
@@ -57,12 +55,13 @@ class HomeViewModel  @Inject constructor(
         initScope()
     }
     fun getRecipesData() = launch {
-        _uiState.value = HomeUiState.Loading(true)
+        _loading.value = true
         getRecipes.invoke()
             .collect {
-            originalRecipes.value = it
-            _recipes.value = it
-        }
+                originalRecipes.value = it
+                _recipes.value = it
+                hideLoading()
+            }
     }
 
     fun queryRecipe(query : String?) {
@@ -72,6 +71,13 @@ class HomeViewModel  @Inject constructor(
     fun toggleFavorite(recipe: Recipe){
         launch {
             toggleRecipeFavorite.invoke(recipe)
+        }
+    }
+
+    private fun hideLoading(){
+        launch {
+            delay(500)
+            _loading.value = false
         }
     }
 
