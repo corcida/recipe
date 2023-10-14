@@ -10,8 +10,8 @@ object FakeRecipes {
             "test 1",
         "",
         "",
-        listOf("ingredient 1", "ingredient 11"),
-        listOf("tag 1", "tag 11"),
+        listOf("ingredient 1", "ingredient 11", "expected ingredient"),
+        listOf("tag 1", "tag 11", "expected tag"),
         Location("", 0.0, 0.0),
         false ),
         Recipe(
@@ -31,8 +31,8 @@ object FakeRecipes {
         "test 1",
         "",
         "",
-        listOf("ingredient 1", "ingredient 11"),
-        listOf("tag 1", "tag 11"),
+        listOf("ingredient 1", "ingredient 11", "expected ingredient"),
+        listOf("tag 1", "tag 11", "expected tag"),
         Location("", 0.0, 0.0),
         false )
 }

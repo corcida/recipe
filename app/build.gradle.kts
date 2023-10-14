@@ -72,6 +72,8 @@ dependencies {
     implementation("androidx.compose.material3:material3")
     implementation("androidx.navigation:navigation-compose:2.7.4")
     implementation("io.coil-kt:coil-compose:2.0.0")
+    implementation("com.google.maps.android:maps-compose:2.15.0")
+    implementation("com.google.android.gms:play-services-maps:18.1.0")
 
     val hiltVersion = "2.44"
     implementation("com.google.dagger:hilt-android:$hiltVersion")

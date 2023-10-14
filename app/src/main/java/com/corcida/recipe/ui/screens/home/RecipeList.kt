@@ -15,7 +15,12 @@ import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.lazy.grid.GridCells
 import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
 import androidx.compose.foundation.lazy.grid.items
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Favorite
+import androidx.compose.material.icons.filled.FavoriteBorder
+import androidx.compose.material.icons.filled.LocationOn
 import androidx.compose.material3.Card
+import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -25,6 +30,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.dimensionResource
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.corcida.domain.Location
@@ -52,7 +58,7 @@ fun RecipeList(
         ){
             RecipeListItem(
                 recipe = it,
-                onClick = { println("navigate") },
+                onClick = { onClick.invoke(it) },
                 onFavoriteClick = { onFavoriteClick.invoke(it) },
                 modifier = Modifier.padding(PaddingValues(dimensionResource(R.dimen.padding_medium))
                 )
@@ -69,7 +75,7 @@ fun RecipeListItem(
     modifier: Modifier = Modifier
 ) {
     Card(
-        border = BorderStroke(2.dp, Color.White),
+        border = BorderStroke(2.dp, MaterialTheme.colorScheme.onBackground),
         modifier = modifier.clickable { onClick() }
     ) {
         Column {
@@ -88,7 +94,7 @@ private fun InformationBox(
         verticalAlignment = Alignment.CenterVertically,
         modifier = Modifier
             .fillMaxWidth()
-            .background(Color.Black)
+            .background(MaterialTheme.colorScheme.primaryContainer)
             .padding(dimensionResource(R.dimen.padding_medium))
     ) {
         val favorite =  recipe.favorite
@@ -99,9 +105,9 @@ private fun InformationBox(
                 horizontal = dimensionResource(R.dimen.padding_xsmall)
             )
         ){
-            Image(
-                painter = painterResource(id = if (favorite) R.drawable.favorite else R.drawable.not_favorite),
-                contentDescription = null,
+            Icon(
+                imageVector = if (favorite) Icons.Default.Favorite else Icons.Default.FavoriteBorder,
+                contentDescription = "Favorite Icon",
                 modifier = Modifier
                     .size(20.dp)
                     .clickable { onFavoriteClick.invoke() }
@@ -109,9 +115,10 @@ private fun InformationBox(
         }
         Text(
             text = recipe.title,
-            color = Color.White,
-            style = MaterialTheme.typography.titleSmall,
+            style = MaterialTheme.typography.bodyMedium,
+            color = MaterialTheme.colorScheme.onPrimaryContainer,
             maxLines = 1,
+            overflow = TextOverflow.Ellipsis,
             modifier = Modifier
                 .padding(horizontal = dimensionResource(R.dimen.padding_medium))
         )

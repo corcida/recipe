@@ -8,8 +8,11 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.dimensionResource
-import coil.compose.AsyncImage
+import coil.compose.SubcomposeAsyncImage
+import coil.request.CachePolicy
+import coil.request.ImageRequest
 import com.corcida.domain.Recipe
 import com.corcida.recipe.R
 
@@ -20,9 +23,11 @@ fun Thumb(recipe: Recipe) {
             .height(dimensionResource(R.dimen.cell_thumb_height))
             .fillMaxWidth()
     ) {
-        Log.e("image", "image data ${recipe.image}")
-        AsyncImage(
-            model = recipe.image,
+        SubcomposeAsyncImage(
+            model = ImageRequest.Builder(LocalContext.current)
+                .data(recipe.image)
+                .diskCachePolicy(CachePolicy.ENABLED)
+                .build(),
             contentDescription = null,
             modifier = Modifier.fillMaxSize(),
             contentScale = ContentScale.Crop,

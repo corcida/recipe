@@ -9,10 +9,10 @@ sealed class NavItem(
 ){
     object HomeNavItem : NavItem("home")
     object DetailNavItem : NavItem("detail", listOf(NavArgs.RecipeId)) {
-        fun createRoute(mediaId: Int) = "$baseRoute/$mediaId"
+        fun createRoute(recipeId: Int) = "$baseRoute/$recipeId"
     }
     object MapNavItem : NavItem("map", listOf(NavArgs.RecipeId)) {
-        fun createRoute(mediaId: Int) = "$baseRoute/$mediaId"
+        fun createRoute(recipeId: Int) = "$baseRoute/$recipeId"
     }
 
     val route = run {

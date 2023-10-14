@@ -3,9 +3,12 @@ package com.corcida.recipe.ui.screens.home
 import androidx.lifecycle.viewModelScope
 import com.corcida.domain.Recipe
 import com.corcida.recipe.ui.screens.common.ScopeViewModel
+import com.corcida.recipe.ui.utils.removeNonSpacingMarks
 import com.corcida.usecases.GetRecipes
 import com.corcida.usecases.ToggleRecipeFavorite
 import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.FlowPreview
+import kotlinx.coroutines.coroutineScope
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.SharingStarted
@@ -18,7 +21,7 @@ import kotlinx.coroutines.flow.stateIn
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
-
+@OptIn(FlowPreview::class)
 @HiltViewModel
 class HomeViewModel  @Inject constructor(
     private val getRecipes: GetRecipes,
@@ -35,18 +38,15 @@ class HomeViewModel  @Inject constructor(
     private val _recipes = MutableStateFlow<List<Recipe>>(listOf())
     val recipes : StateFlow<List<Recipe>> = searchText
         .debounce(100L)
-        .onEach { _uiState.value = HomeUiState.Loading(true) }
-        .combine(originalRecipes) { text, persons ->
+        .combine(originalRecipes) { text, recipe ->
             if(text.isBlank()) {
-                persons
+                recipe
             } else {
-                delay(200L)
-                persons.filter {
-                    filterRecipe(text, it)
+                recipe.filter {
+                    filterRecipe(text.removeNonSpacingMarks(), it)
                 }
             }
         }
-        .onEach { HomeUiState.Loading(false) }
         .stateIn(
             viewModelScope,
             SharingStarted.WhileSubscribed(5000),
@@ -58,7 +58,8 @@ class HomeViewModel  @Inject constructor(
     }
     fun getRecipesData() = launch {
         _uiState.value = HomeUiState.Loading(true)
-        getRecipes.invoke().collect {
+        getRecipes.invoke()
+            .collect {
             originalRecipes.value = it
             _recipes.value = it
         }
@@ -77,9 +78,9 @@ class HomeViewModel  @Inject constructor(
     private fun filterRecipe(query: String?, recipe: Recipe) : Boolean{
         return when {
             query.isNullOrEmpty() -> true
-            recipe.title.lowercase().contains(query.lowercase()) -> true
-            recipe.tags.contains(query) -> true
-            recipe.ingredients.contains(query) -> true
+            recipe.title.removeNonSpacingMarks().contains(query, true) -> true
+            recipe.tags.any { it.removeNonSpacingMarks().contains(query, true) } -> true
+            recipe.ingredients.any { it.removeNonSpacingMarks().contains(query, true) } -> true
             else -> false
         }
     }
