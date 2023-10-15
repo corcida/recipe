@@ -21,7 +21,7 @@ Aplicación de demostración de habilidades basada en un listado de recetas, det
 
 ## Clean architecture
 
-El proyecto está construido bajo el marco de la clean architecture, dividido en 5 capas:
+El proyecto está construido bajo el marco de la clean architecture, dividido en 5 capas modularizadas en 4 módulos, estas son:
 
 - Domain: Contiene todo los modelos de negocio, en este caso particular, la clase Recipe y Location.
 - Data: En esta capa se encuentra una definición abstracta de las diferentes fuentes de datos, y la forma en que se debe utilizar. Usando un patrón de diseño de repositorio que, para una determinada solicitud, es capaz de decidir dónde encontrar la información.
