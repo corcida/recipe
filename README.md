@@ -31,12 +31,12 @@ El proyecto está construido bajo el marco de la clean architecture, dividido en
 
 ## MVVM
 
-Se decidió usar la arquitectura para la capa de presentación de MVVM, siendo la recomendada por Google y que apunta en sus guías de diseño. La comunicación entre el View Model y el Modelo fue mediante nuestros use case inyectados al constructor mediante Hilt, 
+Decidí usar la arquitectura MVVM para la capa de presentación, siendo la recomendada por Google y que apunta en sus guías de diseño. La comunicación entre el View Model y el Modelo fue mediante nuestros use case inyectados al constructor mediante Hilt, 
 y con respecto a la comunicación View Model - View, fue basada en los state flow del tipo de dato correspondiente para cada contexto particular.
 
 # UI
 
-Para la construcción de la UI se decidió utilizar a Jetpack Compose como herramienta, siendo esta la recomendada por Google y siguiendo la consigna de brindar lo más moderno de la plataforma en la construcción de esta app.
+Para la construcción de la UI se decidí usar Jetpack Compose como herramienta, siendo esta la recomendada por Google y siguiendo la consigna de brindar lo más moderno de la plataforma en la construcción de esta app.
 
 La navegación es construida en base a compose y es creada mediante una sola Activity. La carga de imágenes es gracias a Coil. Y se siguieron las guías de diseño para brindar una app preparada para ser vista tanto en modo oscuro como claro.
 
@@ -65,7 +65,7 @@ La inyección de dependencias, necesaria para la escalabilidad del proyecto y fa
 
 # Testing
 
-Para el testing se decidió crear test unitarios a nuestros casos de uso y view models, debido a que en estas clases se encontraba la mayor cantidad de lógica de negocio de nuestra app. Esto gracias a librerías como Junit en la construcción de los test y Mockito, para crear mocks de las dependencias de cada una de las clases bajo prueba.
+Para el testing creé tests unitarios a nuestros casos de uso y view models, debido a que en estas clases se encontraba la mayor cantidad de lógica de negocio de nuestra app. Esto gracias a librerías como Junit en la construcción de los tests y Mockito, para crear mocks de las dependencias de cada una de las clases bajo prueba.
 
 Los mismos pueden ser probados en las task del gradle como: gradle app:testDebugUnitTest y gradle usecases:test
 
