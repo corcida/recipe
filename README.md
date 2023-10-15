@@ -27,7 +27,7 @@ El proyecto está construido bajo el marco de la clean architecture, dividido en
 - Data: En esta capa se encuentra una definición abstracta de las diferentes fuentes de datos, y la forma en que se debe utilizar. Usando un patrón de diseño de repositorio que, para una determinada solicitud, es capaz de decidir dónde encontrar la información.
 - Use cases: Capa que interactúa con la capa de data, definiendo así los procesos que deben ser realizados y pasos para hacer a los mismos. Es también la capa a la cual tiene acceso nuestra capa de presentación desde los view models.
 - Framework: Primera capa ya perteneciente a nuestro módulo android, y la misma define las implementaciones de los local source y remote data source provenientes de la capa de data.
-- Presentation (UI): Segunda capa de nuestr módulo android, y en esta es donde definimos nuestras pantallas, view models y navegación, accediendo a la data mediante nuestros use cases. 
+- Presentation (UI): Segunda capa de nuestro módulo android, y en esta es donde definimos nuestras pantallas, view models y navegación, accediendo a la data mediante nuestros use cases. 
 
 ## MVVM
 
@@ -38,7 +38,7 @@ y con respecto a la comunicación View Model - View, fue basada en los state flo
 
 Para la construcción de la UI se decidió utilizar a Jetpack Compose como herramienta, siendo esta la recomendada por Google y siguiendo la consigna de brindar lo más moderno de la plataforma en la construcción de esta app.
 
-La navegación es construida en base a compose y es creada mediante una sola Activity. La carga de imagenes es gracias a Coil. Y se siguieron las guías de diseño para brindar una app preparada para ser vista tanto en modo oscuro como claro.
+La navegación es construida en base a compose y es creada mediante una sola Activity. La carga de imágenes es gracias a Coil. Y se siguieron las guías de diseño para brindar una app preparada para ser vista tanto en modo oscuro como claro.
 
 ## Screens
 
