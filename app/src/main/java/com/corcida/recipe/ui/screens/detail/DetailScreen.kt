@@ -76,12 +76,19 @@ fun DetailScreen(
                                 .padding(dimensionResource(R.dimen.padding_medium))
                         )
 
-                        for (ingredient in recipeValue.ingredients){
+                        recipeValue.ingredients.forEachIndexed { index, ingredient ->
                             Text(
                                 text = "- $ingredient.",
                                 modifier =
                                 Modifier.padding(
-                                    horizontal = dimensionResource(R.dimen.padding_medium)
+                                    start = dimensionResource(R.dimen.padding_medium),
+                                    end = dimensionResource(R.dimen.padding_medium),
+                                    bottom = dimensionResource(
+                                        if (index == recipeValue.ingredients.lastIndex)
+                                            R.dimen.padding_big
+                                        else
+                                            R.dimen.padding_xsmall
+                                    ),
                                 )
                             )
                         }
