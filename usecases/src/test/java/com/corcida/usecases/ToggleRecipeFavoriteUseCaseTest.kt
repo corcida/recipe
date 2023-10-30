@@ -1,17 +1,14 @@
 package com.corcida.usecases
 
 import com.corcida.data.repository.RecipesRepository
-import com.corcida.data.source.LocalDataSource
-import com.corcida.data.source.RemoteDataSource
 import com.corcida.domain.Location
 import com.corcida.domain.Recipe
 import kotlinx.coroutines.runBlocking
 import org.junit.Test
-import org.mockito.kotlin.doReturn
 import org.mockito.kotlin.mock
 import org.mockito.kotlin.verifyBlocking
 
-class ToggleRecipeFavoriteTest {
+class ToggleRecipeFavoriteUseCaseTest {
 
     @Test
     fun `When toggle recipe favorite is invoked then favorite value on recipe is changed`()  {
@@ -19,10 +16,10 @@ class ToggleRecipeFavoriteTest {
         val recipe = Recipe(1, "test 1", "", "", listOf(), listOf(),
             Location("", 0.0, 0.0), false )
         val repository = mock<RecipesRepository>()
-        val toggleRecipeFavorite = ToggleRecipeFavorite(repository)
+        val toggleRecipeFavoriteUseCase = ToggleRecipeFavoriteUseCase(repository)
 
         //When
-        val response = runBlocking { toggleRecipeFavorite.invoke(recipe) }
+        val response = runBlocking { toggleRecipeFavoriteUseCase.invoke(recipe) }
 
         //Then
         assert(response.favorite != recipe.favorite)
@@ -34,10 +31,10 @@ class ToggleRecipeFavoriteTest {
         val recipe = Recipe(1, "test 1", "", "", listOf(), listOf(),
             Location("", 0.0, 0.0), false )
         val repository = mock<RecipesRepository>()
-        val toggleRecipeFavorite = ToggleRecipeFavorite(repository)
+        val toggleRecipeFavoriteUseCase = ToggleRecipeFavoriteUseCase(repository)
 
         //When
-        val recipeChanged = runBlocking { toggleRecipeFavorite.invoke(recipe) }
+        val recipeChanged = runBlocking { toggleRecipeFavoriteUseCase.invoke(recipe) }
 
         //Then
         verifyBlocking(repository) { update(recipeChanged) }

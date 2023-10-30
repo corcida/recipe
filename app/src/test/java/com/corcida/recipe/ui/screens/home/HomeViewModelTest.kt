@@ -2,8 +2,8 @@ package com.corcida.recipe.ui.screens.home
 
 import com.corcida.recipe.fakes.FakeRecipes
 import com.corcida.recipe.rules.MainDispatcherRule
-import com.corcida.usecases.GetRecipes
-import com.corcida.usecases.ToggleRecipeFavorite
+import com.corcida.usecases.GetRecipesUseCase
+import com.corcida.usecases.ToggleRecipeFavoriteUseCase
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.flow.flowOf
@@ -25,8 +25,8 @@ class HomeViewModelTest {
     private lateinit var viewModel: HomeViewModel
 
     //dependencies
-    private lateinit var getRecipes: GetRecipes
-    private lateinit var toggleRecipeFavorite: ToggleRecipeFavorite
+    private lateinit var getRecipesUseCase: GetRecipesUseCase
+    private lateinit var toggleRecipeFavoriteUseCase: ToggleRecipeFavoriteUseCase
 
     //rules
     @get:Rule
@@ -34,11 +34,11 @@ class HomeViewModelTest {
 
     @Before
     fun setUp(){
-        getRecipes = mock(){
+        getRecipesUseCase = mock(){
             onBlocking { invoke() } doReturn (flowOf(FakeRecipes.fakeRecipes))
         }
-        toggleRecipeFavorite = mock<ToggleRecipeFavorite>()
-        viewModel = HomeViewModel(getRecipes, toggleRecipeFavorite)
+        toggleRecipeFavoriteUseCase = mock<ToggleRecipeFavoriteUseCase>()
+        viewModel = HomeViewModel(getRecipesUseCase, toggleRecipeFavoriteUseCase)
     }
 
     @Test

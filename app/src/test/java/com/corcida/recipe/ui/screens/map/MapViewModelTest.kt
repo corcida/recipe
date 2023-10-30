@@ -2,7 +2,7 @@ package com.corcida.recipe.ui.screens.map
 
 import com.corcida.recipe.fakes.FakeRecipes
 import com.corcida.recipe.rules.MainDispatcherRule
-import com.corcida.usecases.FindRecipe
+import com.corcida.usecases.FindRecipeUseCase
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
@@ -24,7 +24,7 @@ class MapViewModelTest {
     private lateinit var viewModel: MapViewModel
 
     //dependencies
-    private lateinit var findRecipe: FindRecipe
+    private lateinit var findRecipeUseCase: FindRecipeUseCase
 
     //rules
     @get:Rule
@@ -32,10 +32,10 @@ class MapViewModelTest {
     @Before
     fun setUp() {
         val expectedId = 1
-        findRecipe = mock(){
+        findRecipeUseCase = mock(){
             onBlocking { invoke(expectedId) } doReturn (FakeRecipes.fakeRecipes.first { it.id == 1 })
         }
-        viewModel = MapViewModel(findRecipe)
+        viewModel = MapViewModel(findRecipeUseCase)
     }
 
     @Test

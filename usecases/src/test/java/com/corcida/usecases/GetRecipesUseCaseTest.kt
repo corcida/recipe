@@ -11,7 +11,7 @@ import org.mockito.kotlin.mock
 import org.mockito.kotlin.times
 import org.mockito.kotlin.verifyBlocking
 
-class GetRecipesTest {
+class GetRecipesUseCaseTest {
 
     @Test
     fun `When database has already data then server is not called`()  {
@@ -19,7 +19,7 @@ class GetRecipesTest {
         val repository = mock<RecipesRepository>(){
             onBlocking { isDatabaseEmpty() } doReturn (false)
         }
-        val useCase = GetRecipes(repository)
+        val useCase = GetRecipesUseCase(repository)
 
         //When
         runBlocking { useCase.invoke() }
@@ -35,7 +35,7 @@ class GetRecipesTest {
             onBlocking { isDatabaseEmpty() } doReturn (true)
             onBlocking { getRecipesFromServer() } doReturn (listOf())
         }
-        val useCase = GetRecipes(repository)
+        val useCase = GetRecipesUseCase(repository)
 
         //When
         runBlocking { useCase.invoke() }
@@ -53,7 +53,7 @@ class GetRecipesTest {
             onBlocking { isDatabaseEmpty() } doReturn (false)
             onBlocking { getRecipesFromDatabase() } doReturn (flowOf(listOfRecipes))
         }
-        val useCase = GetRecipes(repository)
+        val useCase = GetRecipesUseCase(repository)
 
         //When
         val response = runBlocking { useCase.invoke() }

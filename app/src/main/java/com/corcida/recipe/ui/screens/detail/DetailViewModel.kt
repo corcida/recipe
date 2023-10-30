@@ -2,7 +2,7 @@ package com.corcida.recipe.ui.screens.detail
 
 import com.corcida.domain.Recipe
 import com.corcida.recipe.ui.screens.common.ScopeViewModel
-import com.corcida.usecases.FindRecipe
+import com.corcida.usecases.FindRecipeUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
@@ -11,7 +11,7 @@ import javax.inject.Inject
 
 @HiltViewModel
 class DetailViewModel  @Inject constructor(
-    private val getRecipe: FindRecipe
+    private val getRecipe: FindRecipeUseCase
 ) : ScopeViewModel() {
 
     private val _recipe = MutableStateFlow<Recipe?>(null)

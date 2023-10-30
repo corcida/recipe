@@ -1,9 +1,9 @@
 package com.corcida.recipe.di
 
 import com.corcida.data.repository.RecipesRepository
-import com.corcida.usecases.FindRecipe
-import com.corcida.usecases.GetRecipes
-import com.corcida.usecases.ToggleRecipeFavorite
+import com.corcida.usecases.FindRecipeUseCase
+import com.corcida.usecases.GetRecipesUseCase
+import com.corcida.usecases.ToggleRecipeFavoriteUseCase
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -16,15 +16,15 @@ class UseCasesModule {
     @Provides
     fun getRecipesUseCase(
         repository: RecipesRepository
-    ) = GetRecipes(repository)
+    ) = GetRecipesUseCase(repository)
 
     @Provides
     fun findRecipeUseCase(
         repository: RecipesRepository
-    ) = FindRecipe(repository)
+    ) = FindRecipeUseCase(repository)
 
     @Provides
     fun toggleRecipeFavoriteUseCase(
         repository: RecipesRepository
-    ) = ToggleRecipeFavorite(repository)
+    ) = ToggleRecipeFavoriteUseCase(repository)
 }

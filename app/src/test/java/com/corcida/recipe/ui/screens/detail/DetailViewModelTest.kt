@@ -2,7 +2,7 @@ package com.corcida.recipe.ui.screens.detail
 
 import com.corcida.recipe.fakes.FakeRecipes
 import com.corcida.recipe.rules.MainDispatcherRule
-import com.corcida.usecases.FindRecipe
+import com.corcida.usecases.FindRecipeUseCase
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
@@ -23,7 +23,7 @@ class DetailViewModelTest {
     private lateinit var viewModel: DetailViewModel
 
     //dependencies
-    private lateinit var findRecipe: FindRecipe
+    private lateinit var findRecipeUseCase: FindRecipeUseCase
 
     //rules
     @get:Rule
@@ -32,10 +32,10 @@ class DetailViewModelTest {
     @Before
     fun setUp(){
         val expectedId = 1
-        findRecipe = mock(){
+        findRecipeUseCase = mock(){
             onBlocking { invoke(expectedId) } doReturn (FakeRecipes.fakeRecipes.first { it.id == 1 })
         }
-        viewModel = DetailViewModel(findRecipe)
+        viewModel = DetailViewModel(findRecipeUseCase)
     }
 
     @Test

@@ -11,7 +11,7 @@ import org.mockito.kotlin.doReturn
 import org.mockito.kotlin.mock
 import org.mockito.kotlin.verifyBlocking
 
-class FindRecipeTest{
+class FindRecipeUseCaseTest{
 
     @Test
     fun `When find recipe is invoked then returns repository find recipe is called`()  {
@@ -19,7 +19,7 @@ class FindRecipeTest{
         val repository = mock<RecipesRepository>(){
             onBlocking { findRecipe(1) } doReturn (mock<Recipe>())
         }
-        val useCase = FindRecipe(repository)
+        val useCase = FindRecipeUseCase(repository)
 
         //When
         runBlocking { useCase.invoke(1) }
@@ -42,7 +42,7 @@ class FindRecipeTest{
         }
         val remoteDataSource = mock<RemoteDataSource>()
         val repository = RecipesRepository(localDataSource, remoteDataSource)
-        val useCase = FindRecipe(repository)
+        val useCase = FindRecipeUseCase(repository)
 
         //When
         val response = runBlocking { useCase.invoke(testId) }

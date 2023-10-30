@@ -4,8 +4,8 @@ import androidx.lifecycle.viewModelScope
 import com.corcida.domain.Recipe
 import com.corcida.recipe.ui.screens.common.ScopeViewModel
 import com.corcida.recipe.ui.utils.removeNonSpacingMarks
-import com.corcida.usecases.GetRecipes
-import com.corcida.usecases.ToggleRecipeFavorite
+import com.corcida.usecases.GetRecipesUseCase
+import com.corcida.usecases.ToggleRecipeFavoriteUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.FlowPreview
 import kotlinx.coroutines.delay
@@ -22,8 +22,8 @@ import javax.inject.Inject
 @OptIn(FlowPreview::class)
 @HiltViewModel
 class HomeViewModel  @Inject constructor(
-    private val getRecipes: GetRecipes,
-    private val toggleRecipeFavorite: ToggleRecipeFavorite
+    private val getRecipesUseCase: GetRecipesUseCase,
+    private val toggleRecipeFavoriteUseCase: ToggleRecipeFavoriteUseCase
 ) : ScopeViewModel() {
 
     private val _searchText = MutableStateFlow("")
@@ -56,7 +56,7 @@ class HomeViewModel  @Inject constructor(
     }
     fun getRecipesData() = launch {
         _loading.value = true
-        getRecipes.invoke()
+        getRecipesUseCase.invoke()
             .collect {
                 originalRecipes.value = it
                 _recipes.value = it
@@ -70,7 +70,7 @@ class HomeViewModel  @Inject constructor(
 
     fun toggleFavorite(recipe: Recipe){
         launch {
-            toggleRecipeFavorite.invoke(recipe)
+            toggleRecipeFavoriteUseCase.invoke(recipe)
         }
     }
 
